@@ -17,15 +17,47 @@ sim.load_robot(robot)
 
 running = True
 count = 0
+
+
+goals = [(100,100), (100,200), (200, 200), (200,100)]
+# goals = [(100,100)]
+id = 0
+
+error_sum_x = 0
+error_sum_y = 0
+
+Kp = 0.01
+Ki = 0.0001 
+
+import time
+start_time = time.time()
 while running:
     x, y = sim.r1.sprite.position
-    vx, vy = sim.r1.velocity.vx, sim.r1.velocity.vy
-    if count>100:
-        count = 0
+    X, Y = goals[id]
+    error_x = x-X
+    error_y = y-Y
+    if (error_x, error_y) == (0,0):
+        id+=1
+        id = id%len(goals)
+
+    error_sum_x += error_x
+    error_sum_y += error_y
+
+    sim.r1.velocity.vx = -(Kp*error_x + Ki*error_sum_x) 
+    sim.r1.velocity.vy = -(Kp*error_y + Ki*error_sum_y)
+
+    # sim.r1.velocity.vx = 0.1
+    # sim.r1.velocity.vy = 0.1
+
+
+    vx, vy = int(sim.r1.velocity.vx), int(sim.r1.velocity.vy)
+    current_time = time.time()
+
+    if (current_time-start_time > 1):
         print("\nPostion:",x,y)
         print("Velocity:",vx, vy )
-    count+=0.001
+        start_time = current_time        
 
-    running = sim.run(delay=10) # it should run only one time step, and not the whole loop, so that loop control is over us
+    running = sim.run(delay=0) # it should run only one time step, and not the whole loop, so that loop control is over us
 
 

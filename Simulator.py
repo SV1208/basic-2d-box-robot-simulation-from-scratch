@@ -47,8 +47,8 @@ class MovementSystem(sdl2.ext.Applicator):
     def process(self, world, componentsets):
         for velocity, sprite in componentsets:
             swidth, sheight = sprite.size
-            sprite.x += velocity.vx
-            sprite.y += velocity.vy
+            sprite.x += int(velocity.vx)
+            sprite.y += int(velocity.vy)
 
             sprite.x = max(self.minx, sprite.x)
             sprite.y = max(self.miny, sprite.y)
@@ -108,7 +108,7 @@ class Simulator2D(Simulator):
                 
                 if event.key.keysym.sym in (sdl2.SDLK_LEFT, sdl2.SDLK_RIGHT):
                     self.r1.velocity.vx = 0
-            if delay>0:
-                sdl2.SDL_Delay(10)
-            self.world.process()
+        if delay>0:
+            sdl2.SDL_Delay(delay)
+        self.world.process()
         return 1
