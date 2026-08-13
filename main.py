@@ -22,7 +22,8 @@ sim.load_robot(robot)
 # Choose which search algorithm plans the route: "astar", "dijkstra", or "bfs"
 ALGORITHM = "astar"
 
-goals = [(100, 100), (100, 200), (200, 200), (200, 100)]
+# goals = [(100, 100), (100, 200), (200, 200), (200, 100), (300, 300)]
+goals = [(250, 250), (450, 300)]
 
 start_pos = tuple(sim.r1.sprite.position)
 full_path = []
