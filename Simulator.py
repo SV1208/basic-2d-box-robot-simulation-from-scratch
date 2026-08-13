@@ -19,11 +19,6 @@ class SoftwareRenderer(sdl2.ext.SoftwareSpriteRenderSystem):
 
     def render(self, components):
         sdl2.ext.fill(self.surface, sdl2.ext.Color(0, 0, 0))
-
-        # Draw path
-        # if hasattr(self.world, "robot")
-
-
         super(SoftwareRenderer, self).render(components)
 
 
@@ -125,7 +120,4 @@ class Simulator2D(Simulator):
         if delay>0:
             sdl2.SDL_Delay(delay)
         self.world.process()
-
-        # if self.r1.pen_down:
-        #     self.r1.path.append(self.r1.sprite.position)
         return 1
