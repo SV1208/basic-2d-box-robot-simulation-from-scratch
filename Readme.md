@@ -2,9 +2,11 @@ installation:
 Tested on python version 3.12.0 on windows system
 
 activate the venv environment
+```
 > python -m venv venv
 > venv/bin/Activate
 > pip install -r requirements.txt
+```
 
 Install pysdl2 python bindings, and its compiled form
 > pip install pysdl2 pysdl2-dll
