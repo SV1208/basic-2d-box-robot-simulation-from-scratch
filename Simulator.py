@@ -1,3 +1,4 @@
+import math
 import sdl2
 import sdl2.ext
 
@@ -12,6 +13,7 @@ class Simulator:
         self.robot = robot
 
 WHITE = sdl2.ext.Color(255, 255, 255)
+RED = sdl2.ext.Color(255, 0, 0)
 
 class SoftwareRenderer(sdl2.ext.SoftwareSpriteRenderSystem):
     def __init__(self, window):
@@ -29,6 +31,21 @@ class Velocity(object):
         self.vy = 0
 
 
+# threshold (px/step) below which heading is left unchanged, so the robot
+# doesn't jitter its heading while nearly stationary. Module-level constant,
+# NOT an instance attribute, because sdl2.ext.Entity tracks attributes by
+# type, and a second bare float on the entity would collide with `angle`.
+HEADING_DEADZONE = 0.05
+
+
+class Heading(object):
+    """Heading component. 0 deg = facing +x (right).
+    Coordinate system is y-down, so positive angles rotate clockwise."""
+    def __init__(self):
+        super(Heading, self).__init__()
+        self.angle = 0.0
+
+
 class Robot(sdl2.ext.Entity):
     def __init__(self, world, sprite, posx=0, posy=0):
         self.pen_down = False
@@ -36,12 +53,23 @@ class Robot(sdl2.ext.Entity):
         self.sprite = sprite
         self.sprite.position = posx, posy
         self.velocity = Velocity()
-    
+        self.heading = Heading()
+
     def pen_down(self):
         self.pen_down = True
-    
+
     def pen_up(self):
         self.pen_down = False
+
+    def update_heading(self):
+        """Point the robot's heading along its current velocity vector."""
+        vx, vy = self.velocity.vx, self.velocity.vy
+        if abs(vx) > HEADING_DEADZONE or abs(vy) > HEADING_DEADZONE:
+            self.heading.angle = math.degrees(math.atan2(vy, vx))
+
+    def center(self):
+        sw, sh = self.sprite.size
+        return self.sprite.x + sw // 2, self.sprite.y + sh // 2
 
 class MovementSystem(sdl2.ext.Applicator):
     def __init__(self, minx, miny, maxx, maxy):
@@ -120,4 +148,20 @@ class Simulator2D(Simulator):
         if delay>0:
             sdl2.SDL_Delay(delay)
         self.world.process()
+
+        self.r1.update_heading()
+        self._draw_heading_indicator(self.r1)
+        self.window.refresh()
         return 1
+
+    def _draw_heading_indicator(self, robot, length=None, color=RED):
+        """Draw a short line from the robot's center in its heading direction."""
+        surface = self.window.get_surface()
+        cx, cy = robot.center()
+        if length is None:
+            sw, sh = robot.sprite.size
+            length = max(sw, sh)
+        rad = math.radians(robot.heading.angle)
+        x2 = int(cx + length * math.cos(rad))
+        y2 = int(cy + length * math.sin(rad))
+        sdl2.ext.line(surface, color, (cx, cy, x2, y2))

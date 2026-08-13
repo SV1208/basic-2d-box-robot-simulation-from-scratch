@@ -56,8 +56,7 @@ while running:
     if (current_time-start_time > 1):
         print("\nPostion:",x,y)
         print("Velocity:",vx, vy )
+        print("Heading (deg):", round(sim.r1.heading.angle, 1))
         start_time = current_time        
 
     running = sim.run(delay=0) # it should run only one time step, and not the whole loop, so that loop control is over us
-
-
