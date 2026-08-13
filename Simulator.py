@@ -19,6 +19,11 @@ class SoftwareRenderer(sdl2.ext.SoftwareSpriteRenderSystem):
 
     def render(self, components):
         sdl2.ext.fill(self.surface, sdl2.ext.Color(0, 0, 0))
+
+        # Draw path
+        # if hasattr(self.world, "robot")
+
+
         super(SoftwareRenderer, self).render(components)
 
 
@@ -31,9 +36,17 @@ class Velocity(object):
 
 class Robot(sdl2.ext.Entity):
     def __init__(self, world, sprite, posx=0, posy=0):
+        self.pen_down = False
+        self.path = []
         self.sprite = sprite
         self.sprite.position = posx, posy
         self.velocity = Velocity()
+    
+    def pen_down(self):
+        self.pen_down = True
+    
+    def pen_up(self):
+        self.pen_down = False
 
 class MovementSystem(sdl2.ext.Applicator):
     def __init__(self, minx, miny, maxx, maxy):
@@ -82,6 +95,7 @@ class Simulator2D(Simulator):
         robot_body = factory.from_color(WHITE, size=(20, 20))
 
         self.r1 = Robot(self.world, robot_body, 250, 250)
+        self.world.robot = self.r1
 
     
     def run(self, delay=0):
@@ -111,4 +125,7 @@ class Simulator2D(Simulator):
         if delay>0:
             sdl2.SDL_Delay(delay)
         self.world.process()
+
+        # if self.r1.pen_down:
+        #     self.r1.path.append(self.r1.sprite.position)
         return 1
