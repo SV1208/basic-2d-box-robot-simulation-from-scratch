@@ -14,13 +14,32 @@ class Simulator:
 
 WHITE = sdl2.ext.Color(255, 255, 255)
 RED = sdl2.ext.Color(255, 0, 0)
+YELLOW = sdl2.ext.Color(255, 255, 0)
+
+def rects_overlap(x1, y1, w1, h1, x2, y2, w2, h2):
+    """AABB overlap test for two rectangles given as (x, y, width, height)."""
+    return x1 < x2 + w2 and x1 + w1 > x2 and y1 < y2 + h2 and y1 + h1 > y2
+
 
 class SoftwareRenderer(sdl2.ext.SoftwareSpriteRenderSystem):
     def __init__(self, window):
         super(SoftwareRenderer, self).__init__(window)
+        # obstacles to draw each frame, set via Simulator2D.load_env()
+        self.obstacles = []
+        # planned path waypoints [(x, y), ...] to draw each frame, set via
+        # Simulator2D.set_path()
+        self.path = []
 
     def render(self, components):
         sdl2.ext.fill(self.surface, sdl2.ext.Color(0, 0, 0))
+        for obstacle in self.obstacles:
+            x, y, w, h = obstacle.rect()
+            r, g, b = obstacle.color
+            sdl2.ext.fill(self.surface, sdl2.ext.Color(r, g, b), (x, y, w, h))
+        for (x, y) in self.path:
+            size = 4
+            sdl2.ext.fill(self.surface, YELLOW,
+                          (int(x - size / 2), int(y - size / 2), size, size))
         super(SoftwareRenderer, self).render(components)
 
 
@@ -79,12 +98,29 @@ class MovementSystem(sdl2.ext.Applicator):
         self.miny = miny
         self.maxx = maxx
         self.maxy = maxy
-    
+        # obstacles to collide against, set via Simulator2D.load_env()
+        self.obstacles = []
+
+    def _blocked(self, x, y, w, h):
+        for obstacle in self.obstacles:
+            ox, oy, ow, oh = obstacle.rect()
+            if rects_overlap(x, y, w, h, ox, oy, ow, oh):
+                return True
+        return False
+
     def process(self, world, componentsets):
         for velocity, sprite in componentsets:
             swidth, sheight = sprite.size
-            sprite.x += int(velocity.vx)
-            sprite.y += int(velocity.vy)
+
+            # move on each axis independently so the robot slides along
+            # a wall/obstacle instead of fully stopping on diagonal contact
+            new_x = sprite.x + int(velocity.vx)
+            if not self._blocked(new_x, sprite.y, swidth, sheight):
+                sprite.x = new_x
+
+            new_y = sprite.y + int(velocity.vy)
+            if not self._blocked(sprite.x, new_y, swidth, sheight):
+                sprite.y = new_y
 
             sprite.x = max(self.minx, sprite.x)
             sprite.y = max(self.miny, sprite.y)
@@ -108,17 +144,34 @@ class Simulator2D(Simulator):
 
         self.world = sdl2.ext.World()
 
-        movement = MovementSystem(0, 0, 800, 600)
-        spriterenderer = SoftwareRenderer(self.window)
+        self.movement = MovementSystem(0, 0, 800, 600)
+        self.spriterenderer = SoftwareRenderer(self.window)
 
-        self.world.add_system(movement)
-        self.world.add_system(spriterenderer)
+        self.world.add_system(self.movement)
+        self.world.add_system(self.spriterenderer)
 
         factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
         robot_body = factory.from_color(WHITE, size=(20, 20))
 
         self.r1 = Robot(self.world, robot_body, 250, 250)
         self.world.robot = self.r1
+        self.env = None
+
+    def load_env(self, env):
+        """Load an Environment (e.g. Env2D) into the simulator: wires up
+        movement bounds, obstacle collision, and obstacle rendering."""
+        self.env = env
+        self.movement.minx = 0
+        self.movement.miny = 0
+        self.movement.maxx = env.width
+        self.movement.maxy = env.height
+        self.movement.obstacles = env.obstacles
+        self.spriterenderer.obstacles = env.obstacles
+
+    def set_path(self, waypoints):
+        """Set the planned path (list of (x, y) world coords) to draw for
+        debugging/visualization."""
+        self.spriterenderer.path = list(waypoints) if waypoints else []
 
     
     def run(self, delay=0):
