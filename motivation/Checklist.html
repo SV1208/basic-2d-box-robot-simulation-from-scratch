@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 DAILY MICRO-CHECKLIST (30 DAYS)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(30, 30, 45, 0.9);
+            border: 3px solid #ff6b35;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff6b35;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .rule-zero {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .rule-zero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .rule-zero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .step {
+            background: rgba(20, 20, 35, 0.7);
+            border-left: 5px solid #4ecdc4;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: -5px 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .step h3 {
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .step-content {
+            color: #e0e0e0;
+        }
+
+        .step-content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .rules {
+            background: rgba(10, 10, 20, 0.5);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            border-left: 3px solid #f7931e;
+        }
+
+        .rules p {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .examples {
+            margin: 1rem 0;
+        }
+
+        .valid {
+            color: #4ecdc4;
+        }
+
+        .invalid {
+            color: #ff6b35;
+        }
+
+        .allowed {
+            color: #4ecdc4;
+        }
+
+        .forbidden {
+            color: #ff6b35;
+        }
+
+        .warning {
+            color: #ff6b35;
+            font-weight: bold;
+            margin: 0.3rem 0;
+            padding-left: 1rem;
+        }
+
+        .cheat-section {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border: 3px solid #ff6b35;
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+        }
+
+        .cheat-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .cheat-section p {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .final-lock {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            border: 3px solid #4ecdc4;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 2rem;
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .final-lock h3 {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .final-lock p {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            color: #f7931e;
+            font-weight: bold;
+        }
+
+        ul {
+            margin: 0.8rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .emoji {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .step h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 DAILY MICRO-CHECKLIST (30 DAYS)</h1>
+        <div class="subtitle">Robotics / AI – Builder Mode</div>
+
+        <div class="rule-zero">
+            <h2>RULE ZERO (read every day)</h2>
+            <p>If a step is skipped, the day is FAILED.</p>
+            <p>Partial completion = failure.</p>
+            <p>Quality does NOT matter. Completion does.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">⏱️</span>STEP 1 — START PROTOCOL (5 minutes)</h3>
+            <div class="step-content">
+                <p><strong>You must do these in order, no thinking.</strong></p>
+                <ul>
+                    <li>Sit at your desk</li>
+                    <li>Open only: code editor OR notebook terminal / simulator (if needed)</li>
+                    <li>Start a 90-minute timer</li>
+                    <li>Write TODAY'S DATE at top of file / notebook</li>
+                </ul>
+                <p class="warning">❌ If timer not started → cheating</p>
+                <p class="warning">❌ If date not written → cheating</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🧭</span>STEP 2 — DEFINE TODAY'S MICRO-GOAL (5 minutes max)</h3>
+            <div class="step-content">
+                <p><strong>Write ONE sentence, nothing more:</strong></p>
+                <p>"Today I will implement / modify __________."</p>
+                
+                <div class="rules">
+                    <p><strong>Rules:</strong></p>
+                    <p>• Must produce new output</p>
+                    <p>• Must be finishable today</p>
+                    <p>• Must be specific</p>
+                </div>
+
+                <div class="examples">
+                    <p><strong class="valid">Examples (valid)</strong></p>
+                    <ul>
+                        <li class="valid">"Implement PID controller skeleton for motor"</li>
+                        <li class="valid">"Code forward kinematics for 2-link arm"</li>
+                        <li class="valid">"Train baseline model and log accuracy"</li>
+                        <li class="valid">"Simulate obstacle avoidance logic"</li>
+                    </ul>
+                </div>
+
+                <div class="examples">
+                    <p><strong class="invalid">Examples (invalid)</strong></p>
+                    <ul>
+                        <li class="invalid">"Understand SLAM"</li>
+                        <li class="invalid">"Learn ROS"</li>
+                        <li class="invalid">"Improve project"</li>
+                        <li class="invalid">"Debug stuff"</li>
+                    </ul>
+                </div>
+
+                <p class="warning">❌ If goal > 1 sentence → cheating</p>
+                <p class="warning">❌ If vague → cheating</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🧱</span>STEP 3 — BUILD PHASE (70 minutes)</h3>
+            <div class="step-content">
+                <p><strong>This is the core. No mercy.</strong></p>
+                
+                <div class="rules">
+                    <p><strong class="allowed">Allowed actions</strong></p>
+                    <ul>
+                        <li class="allowed">Writing new code</li>
+                        <li class="allowed">Modifying existing code</li>
+                        <li class="allowed">Writing equations</li>
+                        <li class="allowed">Running simulations</li>
+                        <li class="allowed">Testing and changing parameters</li>
+                        <li class="allowed">Making things slightly less broken</li>
+                    </ul>
+                </div>
+
+                <div class="rules">
+                    <p><strong class="forbidden">Forbidden actions</strong></p>
+                    <ul>
+                        <li class="forbidden">Watching videos</li>
+                        <li class="forbidden">Reading tutorials</li>
+                        <li class="forbidden">Browsing documentation for more than 5 minutes at a time</li>
+                        <li class="forbidden">Refactoring for beauty</li>
+                        <li class="forbidden">Planning future work</li>
+                        <li class="forbidden">Rewriting notes</li>
+                    </ul>
+                </div>
+
+                <p><strong>If stuck:</strong> You must still write something. Confusion is not an exception.</p>
+
+                <p class="warning">❌ No new file / change at end → cheating</p>
+                <p class="warning">❌ Only reading / watching → cheating</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🧾</span>STEP 4 — ARTIFACT CHECK (5 minutes)</h3>
+            <div class="step-content">
+                <p><strong>At minute ~75:</strong></p>
+                <p>You must have ONE tangible artifact:</p>
+                <ul>
+                    <li>.c / .cpp / .py file changed</li>
+                    <li>Git commit</li>
+                    <li>Simulation output</li>
+                    <li>Math derivation page</li>
+                    <li>Log file with results</li>
+                </ul>
+                <p><strong>Ask ONE question:</strong> "Can this be shown to another robotics/AI person?"</p>
+                <p>If no → day failed.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🧠</span>STEP 5 — SINGLE LINE LOG (5 minutes)</h3>
+            <div class="step-content">
+                <p><strong>Write exactly 2 lines, no more.</strong></p>
+                <ul>
+                    <li><strong>Line 1:</strong> What I built / changed today</li>
+                    <li><strong>Line 2:</strong> What is broken / unclear</li>
+                </ul>
+                <p>No reflection. No emotion. No journaling.</p>
+                <p>This prevents fake productivity.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🛑</span>STEP 6 — HARD STOP (0 minutes)</h3>
+            <div class="step-content">
+                <p><strong>When timer ends:</strong></p>
+                <ul>
+                    <li>Stop immediately</li>
+                    <li>Even if "almost done"</li>
+                    <li>Close editor</li>
+                </ul>
+                <p><strong>Stopping trains respect for limits.</strong></p>
+                <p class="warning">❌ Continuing = cheating</p>
+                <p class="warning">❌ "Just 5 more minutes" = cheating</p>
+            </div>
+        </div>
+
+        <div class="cheat-section">
+            <h3><span class="emoji">🚨</span>CHEAT DETECTION (non-negotiable)</h3>
+            <p>If ANY of these happened, the day is FAILED:</p>
+            <ul>
+                <li>Timer not used</li>
+                <li>No new artifact</li>
+                <li>More consuming than building</li>
+                <li>Multiple goals</li>
+                <li>Changing task definition</li>
+                <li>Restarting timer</li>
+                <li>"I'll fix it tomorrow"</li>
+            </ul>
+            <p style="margin-top: 1rem;">No excuses. Just mark FAILED and apply penalty.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">📆</span>WHAT CHANGES DAY TO DAY?</h3>
+            <div class="step-content">
+                <p><strong>Only ONE thing: the micro-goal</strong></p>
+                <p>Everything else stays identical for 30 days.</p>
+                <p>No optimization. No tweaking. No redesign.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🧠</span>WHY THIS WORKS (very briefly)</h3>
+            <div class="step-content">
+                <ul>
+                    <li>Removes choice</li>
+                    <li>Removes identity games</li>
+                    <li>Forces contact with reality</li>
+                    <li>Makes cheating obvious</li>
+                    <li>Builds compounding artifacts</li>
+                    <li>Trains showing up, not motivation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="final-lock">
+            <h3>FINAL LOCK</h3>
+            <p>For the next 30 days, you are not:</p>
+            <ul>
+                <li>"learning robotics"</li>
+                <li>"preparing for AI career"</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong class="highlight">You are:</strong></p>
+            <p><strong>Someone who builds one small, real thing every day without negotiation.</strong></p>
+        </div>
+    </div>
+</body>
+</html>

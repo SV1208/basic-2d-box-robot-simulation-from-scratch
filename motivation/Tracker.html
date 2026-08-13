@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 30-DAY ROBOTICS PROJECT TRACKER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(30, 30, 45, 0.95);
+            border: 3px solid #ff6b35;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff6b35;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .theme-section {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .theme-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .theme-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .rules-box {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border: 3px solid #ff6b35;
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+        }
+
+        .rules-box h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .rules-box ul {
+            margin-left: 1.5rem;
+        }
+
+        .rules-box li {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .week-section {
+            background: rgba(20, 20, 35, 0.8);
+            border-left: 5px solid #4ecdc4;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 6px;
+        }
+
+        .week-section h2 {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .week-description {
+            color: #f7931e;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .day-card {
+            background: rgba(10, 10, 20, 0.9);
+            border: 2px solid #333;
+            border-radius: 6px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .day-card:hover {
+            border-color: #4ecdc4;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+            transform: translateX(5px);
+        }
+
+        .day-card.completed {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .day-card.failed {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .day-checkbox {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+            cursor: pointer;
+            accent-color: #4ecdc4;
+            flex-shrink: 0;
+        }
+
+        .day-title {
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .day-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+        .status-pending {
+            background: rgba(128, 128, 128, 0.3);
+            color: #aaa;
+        }
+
+        .status-done {
+            background: rgba(78, 205, 196, 0.3);
+            color: #4ecdc4;
+        }
+
+        .status-failed {
+            background: rgba(255, 107, 53, 0.3);
+            color: #ff6b35;
+        }
+
+        .day-goal {
+            color: #e0e0e0;
+            font-size: 1.05rem;
+            padding-left: 2.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+        }
+
+        .day-checklist {
+            padding-left: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.6rem;
+            color: #ccc;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 0.8rem;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #f7931e;
+            flex-shrink: 0;
+        }
+
+        .fail-button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .fail-button:hover {
+            background: #b71c1c;
+        }
+
+        .progress-bar-container {
+            background: rgba(20, 20, 35, 0.8);
+            border: 2px solid #4ecdc4;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar-container h3 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(10, 10, 20, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #333;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4 0%, #f7931e 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(10, 10, 20, 0.8);
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #333;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 0.3rem;
+        }
+
+        .reset-button {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 1rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background 0.2s;
+        }
+
+        .reset-button:hover {
+            background: #e55a2b;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .day-header {
+                flex-wrap: wrap;
+            }
+
+            .day-status {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 30-DAY ROBOTICS PROJECT TRACKER</h1>
+        <div class="subtitle">2D Mobile Robot Simulation - Build Mode</div>
+
+        <div class="theme-section">
+            <h2>🔒 PROJECT THEME (FIXED FOR 30 DAYS)</h2>
+            <p><strong>2D Mobile Robot Simulation with Control + Perception + Decision Logic</strong></p>
+            <p>(from scratch)</p>
+            <p>No ROS. No libraries doing the thinking for you. Only math, logic, and code.</p>
+            <p><strong>Language:</strong> Python or C++ (you choose once, today, and don't switch).</p>
+        </div>
+
+        <div class="progress-bar-container">
+            <h3>OVERALL PROGRESS</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="completedCount">0</div>
+                    <div class="stat-label">COMPLETED</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="failedCount">0</div>
+                    <div class="stat-label">FAILED</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="streakCount">0</div>
+                    <div class="stat-label">CURRENT STREAK</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="remainingCount">30</div>
+                    <div class="stat-label">REMAINING</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 1 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 1–5: CORE FOUNDATIONS</h2>
+            <div class="week-description">PAINFUL BUT NECESSARY</div>
+
+            <div class="day-card" data-day="1">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day1-complete">
+                    <div class="day-title">DAY 1</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Create project structure + main loop that runs but does nothing.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>🧭 Write goal: "Create project structure + main loop that runs but does nothing."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>🧱 Create folders, main file, and basic loop</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>🧾 Have artifact: project structure + runnable file</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="1">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="2">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day2-complete">
+                    <div class="day-title">DAY 2</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Define robot state: position (x, y), heading (θ), velocity.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>🧭 Write goal: "Define robot state: position (x, y), heading (θ), velocity."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>🧱 Create robot state structure/class with variables</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>🧾 Have artifact: code defining robot state</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="2">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="3">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day3-complete">
+                    <div class="day-title">DAY 3</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement differential drive kinematic update equations.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>🧭 Write goal: "Implement differential drive kinematic update equations."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>🧱 Code kinematic equations (dx, dy, dθ)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>🧾 Have artifact: update function implemented</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="3">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="4">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day4-complete">
+                    <div class="day-title">DAY 4</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Add time-step simulation loop and log robot state per step.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>🧭 Write goal: "Add time-step simulation loop and log robot state per step."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>🧱 Implement loop with time steps and logging</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>🧾 Have artifact: simulation runs and logs state</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="4">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="5">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day5-complete">
+                    <div class="day-title">DAY 5</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Visualize robot trajectory (simple plot or ASCII output).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>🧭 Write goal: "Visualize robot trajectory (simple plot or ASCII output)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>🧱 Add visualization code (matplotlib/ASCII)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>🧾 Have artifact: trajectory plot/output</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="5">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 2 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 6–10: CONTROL</h2>
+            <div class="week-description">THIS IS WHERE DISCOMFORT STARTS</div>
+
+            <div class="day-card" data-day="6">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day6-complete">
+                    <div class="day-title">DAY 6</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement basic open-loop forward motion command.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>🧭 Write goal: "Implement basic open-loop forward motion command."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>🧱 Code forward motion control</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>🧾 Have artifact: robot moves forward in simulation</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="6">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="7">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day7-complete">
+                    <div class="day-title">DAY 7</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement PID controller for heading control.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>🧭 Write goal: "Implement PID controller for heading control."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>🧱 Code PID controller (P, I, D terms)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>🧾 Have artifact: PID controller implemented</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="7">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="8">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day8-complete">
+                    <div class="day-title">DAY 8</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Tune PID parameters manually and log oscillations.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>🧭 Write goal: "Tune PID parameters manually and log oscillations."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>🧱 Test different Kp, Ki, Kd values</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>🧾 Have artifact: log file with tuning results</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="8">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="9">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day9-complete">
+                    <div class="day-title">DAY 9</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Add waypoint following (single target point).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>🧭 Write goal: "Add waypoint following (single target point)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>🧱 Implement waypoint navigation logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>🧾 Have artifact: robot moves toward waypoint</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="9">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="10">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day10-complete">
+                    <div class="day-title">DAY 10</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Make robot stop within tolerance of waypoint.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>🧭 Write goal: "Make robot stop within tolerance of waypoint."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>🧱 Add stopping condition logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>🧾 Have artifact: robot stops at target</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="10">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 3 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 11–15: SENSING & ENVIRONMENT</h2>
+
+            <div class="day-card" data-day="11">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day11-complete">
+                    <div class="day-title">DAY 11</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Define 2D environment with obstacles (hardcoded).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>🧭 Write goal: "Define 2D environment with obstacles (hardcoded)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>🧱 Create environment data structure with obstacles</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>🧾 Have artifact: environment definition</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="11">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="12">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day12-complete">
+                    <div class="day-title">DAY 12</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Simulate range sensor (ray casting / distance check).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>🧭 Write goal: "Simulate range sensor (ray casting / distance check)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>🧱 Implement sensor simulation logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>🧾 Have artifact: sensor returns distances</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="12">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="13">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day13-complete">
+                    <div class="day-title">DAY 13</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Add sensor noise model.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>🧭 Write goal: "Add sensor noise model."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>🧱 Implement noise (Gaussian/random)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>🧾 Have artifact: noisy sensor readings</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="13">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="14">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day14-complete">
+                    <div class="day-title">DAY 14</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Visualize sensor readings.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>🧭 Write goal: "Visualize sensor readings."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>🧱 Add sensor visualization (rays/plot)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>🧾 Have artifact: visual sensor display</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="14">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="15">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day15-complete">
+                    <div class="day-title">DAY 15</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Detect obstacle presence in front of robot.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>🧭 Write goal: "Detect obstacle presence in front of robot."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>🧱 Implement obstacle detection logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>🧾 Have artifact: detection working</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="15">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 4 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 16–20: DECISION LOGIC</h2>
+            <div class="week-description">NO ML YET</div>
+
+            <div class="day-card" data-day="16">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day16-complete">
+                    <div class="day-title">DAY 16</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement simple obstacle avoidance logic.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>🧭 Write goal: "Implement simple obstacle avoidance logic."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>🧱 Code avoidance behavior</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>🧾 Have artifact: robot avoids obstacles</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="16">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="17">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day17-complete">
+                    <div class="day-title">DAY 17</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Combine waypoint following + avoidance (priority logic).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>🧭 Write goal: "Combine waypoint following + avoidance (priority logic)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>🧱 Merge navigation and avoidance</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>🧾 Have artifact: integrated behavior</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="17">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="18">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day18-complete">
+                    <div class="day-title">DAY 18</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Handle edge cases (stuck, oscillation).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>🧭 Write goal: "Handle edge cases (stuck, oscillation)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>🧱 Add detection and recovery logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>🧾 Have artifact: edge case handling</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="18">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="19">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day19-complete">
+                    <div class="day-title">DAY 19</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Log decision states (why robot chose action).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>🧭 Write goal: "Log decision states (why robot chose action)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>🧱 Add decision logging system</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>🧾 Have artifact: decision log file</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="19">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="20">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day20-complete">
+                    <div class="day-title">DAY 20</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Run full simulation and record failure cases.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>🧭 Write goal: "Run full simulation and record failure cases."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>🧱 Test system and document failures</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>🧾 Have artifact: failure case log</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="20">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 5 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 21–25: AI / LEARNING COMPONENT</h2>
+
+            <div class="day-card" data-day="21">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day21-complete">
+                    <div class="day-title">DAY 21</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Define state representation for learning.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>🧭 Write goal: "Define state representation for learning."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>🧱 Design state vector/features</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>🧾 Have artifact: state definition code</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="21">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="22">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day22-complete">
+                    <div class="day-title">DAY 22</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Define action space.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>🧭 Write goal: "Define action space."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>🧱 Define discrete/continuous actions</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>🧾 Have artifact: action space code</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="22">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="23">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day23-complete">
+                    <div class="day-title">DAY 23</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement reward function.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>🧭 Write goal: "Implement reward function."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>🧱 Code reward calculation logic</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>🧾 Have artifact: reward function</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="23">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="24">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day24-complete">
+                    <div class="day-title">DAY 24</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Implement basic Q-learning or policy gradient (from scratch).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>🧭 Write goal: "Implement basic Q-learning or policy gradient (from scratch)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>🧱 Code learning algorithm</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>🧾 Have artifact: learning code</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="24">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="25">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day25-complete">
+                    <div class="day-title">DAY 25</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Train agent for limited episodes and log reward curve.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>🧭 Write goal: "Train agent for limited episodes and log reward curve."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>🧱 Run training and log results</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>🧾 Have artifact: training log/plot</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="25">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 6 -->
+        <div class="week-section">
+            <h2>🔹 DAYS 26–30: INTEGRATION & HARDENING</h2>
+
+            <div class="day-card" data-day="26">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day26-complete">
+                    <div class="day-title">DAY 26</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Integrate learned policy into simulation loop.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>🧭 Write goal: "Integrate learned policy into simulation loop."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>🧱 Connect policy to simulation</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>🧾 Have artifact: integrated system</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="26">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="27">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day27-complete">
+                    <div class="day-title">DAY 27</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Compare rule-based vs learned behavior.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>🧭 Write goal: "Compare rule-based vs learned behavior."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>🧱 Run both and collect metrics</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>🧾 Have artifact: comparison data</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="27">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="28">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day28-complete">
+                    <div class="day-title">DAY 28</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Stress test with random environments.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>🧭 Write goal: "Stress test with random environments."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>🧱 Generate random tests and run</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>🧾 Have artifact: test results log</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="28">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="29">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day29-complete">
+                    <div class="day-title">DAY 29</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Document system architecture (one diagram + notes).</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>🧭 Write goal: "Document system architecture (one diagram + notes)."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>🧱 Create architecture diagram</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>🧾 Have artifact: diagram + documentation</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="29">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card" data-day="30">
+                <div class="day-header">
+                    <input type="checkbox" class="day-checkbox" id="day30-complete">
+                    <div class="day-title">DAY 30</div>
+                    <span class="day-status status-pending">PENDING</span>
+                    <button class="fail-button">MARK FAILED</button>
+                </div>
+                <div class="day-goal">Write a README explaining: what you built, what works, what fails, what you'd improve.</div>
+                <div class="day-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>⏱️ Start 90-min timer & write today's date</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>🧭 Write goal: "Write a README explaining: what you built, what works, what fails, what you'd improve."</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>🧱 Write comprehensive README</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>🧾 Have artifact: README.md file</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>🧠 Log: What built / What's broken</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="step-check" data-day="30">
+                        <span>🛑 Stop when timer ends</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rules-box">
+            <h2>🚨 NON-NEGOTIABLE RULES</h2>
+            <p>You may NOT:</p>
+            <ul>
+                <li>skip days</li>
+                <li>reorder days</li>
+                <li>"prepare ahead"</li>
+                <li>replace ML with reading</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>If stuck:</strong> implement something broken, log the failure.</p>
+            <p>Ugly code is acceptable. Missing a day triggers your penalty system.</p>
+        </div>
+
+        <button class="reset-button" onclick="resetProgress()">🔄 RESET ALL PROGRESS</button>
+    </div>
+
+    <script>
+        // Load saved state from localStorage
+        function loadState() {
+            const savedState = localStorage.getItem('robotics30DayState');
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                
+                // Restore day completion states
+                for (let day = 1; day <= 30; day++) {
+                    const checkbox = document.getElementById(`day${day}-complete`);
+                    const card = document.querySelector(`[data-day="${day}"]`);
+                    const status = card.querySelector('.day-status');
+                    
+                    if (state.days[day]) {
+                        if (state.days[day].status === 'completed') {
+                            checkbox.checked = true;
+                            card.classList.add('completed');
+                            status.textContent = 'DONE';
+                            status.className = 'day-status status-done';
+                        } else if (state.days[day].status === 'failed') {
+                            card.classList.add('failed');
+                            status.textContent = 'FAILED';
+                            status.className = 'day-status status-failed';
+                        }
+                        
+                        // Restore step checkboxes
+                        const stepChecks = card.querySelectorAll('.step-check');
+                        if (state.days[day].steps) {
+                            stepChecks.forEach((check, index) => {
+                                check.checked = state.days[day].steps[index] || false;
+                            });
+                        }
+                    }
+                }
+                
+                updateProgress();
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            const state = { days: {} };
+            
+            for (let day = 1; day <= 30; day++) {
+                const card = document.querySelector(`[data-day="${day}"]`);
+                const checkbox = document.getElementById(`day${day}-complete`);
+                const stepChecks = card.querySelectorAll('.step-check');
+                
+                let status = 'pending';
+                if (card.classList.contains('completed')) {
+                    status = 'completed';
+                } else if (card.classList.contains('failed')) {
+                    status = 'failed';
+                }
+                
+                const steps = Array.from(stepChecks).map(check => check.checked);
+                
+                state.days[day] = { status, steps };
+            }
+            
+            localStorage.setItem('robotics30DayState', JSON.stringify(state));
+        }
+
+        // Update progress statistics
+        function updateProgress() {
+            let completed = 0;
+            let failed = 0;
+            let currentStreak = 0;
+            let tempStreak = 0;
+            
+            for (let day = 1; day <= 30; day++) {
+                const card = document.querySelector(`[data-day="${day}"]`);
+                
+                if (card.classList.contains('completed')) {
+                    completed++;
+                    tempStreak++;
+                    if (tempStreak > currentStreak) {
+                        currentStreak = tempStreak;
+                    }
+                } else if (card.classList.contains('failed')) {
+                    failed++;
+                    tempStreak = 0;
+                } else {
+                    // Only count streak up to first incomplete day
+                    break;
+                }
+            }
+            
+            const remaining = 30 - completed - failed;
+            const percentage = Math.round((completed / 30) * 100);
+            
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('failedCount').textContent = failed;
+            document.getElementById('streakCount').textContent = currentStreak;
+            document.getElementById('remainingCount').textContent = remaining;
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+        }
+
+        // Setup event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            loadState();
+            
+            // Day completion checkboxes
+            for (let day = 1; day <= 30; day++) {
+                const checkbox = document.getElementById(`day${day}-complete`);
+                const card = document.querySelector(`[data-day="${day}"]`);
+                const status = card.querySelector('.day-status');
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        card.classList.remove('failed');
+                        card.classList.add('completed');
+                        status.textContent = 'DONE';
+                        status.className = 'day-status status-done';
+                    } else {
+                        card.classList.remove('completed');
+                        status.textContent = 'PENDING';
+                        status.className = 'day-status status-pending';
+                    }
+                    updateProgress();
+                    saveState();
+                });
+                
+                // Fail button
+                const failButton = card.querySelector('.fail-button');
+                failButton.addEventListener('click', function() {
+                    if (confirm('Mark Day ' + day + ' as FAILED?')) {
+                        checkbox.checked = false;
+                        card.classList.remove('completed');
+                        card.classList.add('failed');
+                        status.textContent = 'FAILED';
+                        status.className = 'day-status status-failed';
+                        updateProgress();
+                        saveState();
+                    }
+                });
+                
+                // Step checkboxes
+                const stepChecks = card.querySelectorAll('.step-check');
+                stepChecks.forEach(check => {
+                    check.addEventListener('change', saveState);
+                });
+            }
+        });
+
+        function resetProgress() {
+            if (confirm('Reset ALL progress? This cannot be undone!')) {
+                if (confirm('Are you absolutely sure? All data will be lost.')) {
+                    localStorage.removeItem('robotics30DayState');
+                    location.reload();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
